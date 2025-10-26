@@ -132,7 +132,7 @@ class SaveNewTitleTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $longUrl = 'https://example.com/' . str_repeat('a', 500);
+        $longUrl = 'https://example.com/'.str_repeat('a', 500);
 
         $response = $this->actingAs($user, 'sanctum')
             ->postJson('/api/admin/save-new-title', [

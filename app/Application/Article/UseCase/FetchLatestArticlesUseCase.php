@@ -10,8 +10,7 @@ final readonly class FetchLatestArticlesUseCase
 {
     public function __construct(
         private ArticleRepositoryInterface $articleRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @return ArticleOutput[]
@@ -21,7 +20,7 @@ final readonly class FetchLatestArticlesUseCase
         $articles = $this->articleRepository->fetchLatest($limit);
 
         return array_map(
-            fn(Article $article) => $this->toOutput($article),
+            fn (Article $article) => $this->toOutput($article),
             $articles
         );
     }

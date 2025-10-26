@@ -12,8 +12,7 @@ final readonly class ArticleOutput
         public ?string $publishedAt,
         public ?string $createdAt,
         public ?string $updatedAt
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

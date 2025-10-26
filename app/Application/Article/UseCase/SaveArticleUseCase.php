@@ -16,8 +16,7 @@ final readonly class SaveArticleUseCase
 {
     public function __construct(
         private ArticleRepositoryInterface $articleRepository
-    ) {
-    }
+    ) {}
 
     public function execute(SaveArticleInput $input): ArticleOutput
     {
@@ -29,7 +28,7 @@ final readonly class SaveArticleUseCase
             throw new InvalidArgumentException('このURLは既に登録されています。');
         }
 
-        $publishedAt = $input->publishedAt 
+        $publishedAt = $input->publishedAt
             ? new DateTimeImmutable($input->publishedAt)
             : null;
 

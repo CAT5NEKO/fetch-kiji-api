@@ -10,8 +10,7 @@ class FetchTitlesController extends Controller
 {
     public function __construct(
         private readonly FetchLatestArticlesUseCase $fetchLatestArticlesUseCase
-    ) {
-    }
+    ) {}
 
     public function index(): JsonResponse
     {

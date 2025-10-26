@@ -17,8 +17,7 @@ final class Article
         private ?DateTimeImmutable $publishedAt,
         private ?DateTimeImmutable $createdAt,
         private ?DateTimeImmutable $updatedAt
-    ) {
-    }
+    ) {}
 
     public static function create(
         ArticleUrl $url,

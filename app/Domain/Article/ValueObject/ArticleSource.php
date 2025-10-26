@@ -6,8 +6,7 @@ final readonly class ArticleSource
 {
     private function __construct(
         private ?string $value
-    ) {
-    }
+    ) {}
 
     public static function from(?string $source): self
     {

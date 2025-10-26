@@ -44,14 +44,14 @@ final class EloquentArticleRepository implements ArticleRepositoryInterface
             ->limit($limit)
             ->get();
 
-        return $eloquentArticles->map(fn($article) => $this->toDomain($article))->all();
+        return $eloquentArticles->map(fn ($article) => $this->toDomain($article))->all();
     }
 
     public function fetchAll(): array
     {
         $eloquentArticles = EloquentArticle::orderBy('created_at', 'desc')->get();
 
-        return $eloquentArticles->map(fn($article) => $this->toDomain($article))->all();
+        return $eloquentArticles->map(fn ($article) => $this->toDomain($article))->all();
     }
 
     public function existsByUrl(ArticleUrl $url): bool
@@ -66,7 +66,7 @@ final class EloquentArticleRepository implements ArticleRepositoryInterface
             url: ArticleUrl::from($eloquentArticle->url),
             title: ArticleTitle::from($eloquentArticle->title),
             source: ArticleSource::from($eloquentArticle->source),
-            publishedAt: $eloquentArticle->published_at 
+            publishedAt: $eloquentArticle->published_at
                 ? new DateTimeImmutable($eloquentArticle->published_at->format('Y-m-d H:i:s'))
                 : null,
             createdAt: new DateTimeImmutable($eloquentArticle->created_at->format('Y-m-d H:i:s')),

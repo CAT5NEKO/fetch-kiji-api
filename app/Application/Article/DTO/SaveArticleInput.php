@@ -9,6 +9,5 @@ final readonly class SaveArticleInput
         public string $title,
         public ?string $source = null,
         public ?string $publishedAt = null
-    ) {
-    }
+    ) {}
 }

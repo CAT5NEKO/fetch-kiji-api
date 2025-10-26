@@ -8,8 +8,7 @@ final readonly class ArticleUrl
 {
     private function __construct(
         private string $value
-    ) {
-    }
+    ) {}
 
     public static function from(string $url): self
     {
@@ -17,7 +16,7 @@ final readonly class ArticleUrl
             throw new InvalidArgumentException('URLは必須です。');
         }
 
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        if (! filter_var($url, FILTER_VALIDATE_URL)) {
             throw new InvalidArgumentException('URL形式が不正です。');
         }
 

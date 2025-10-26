@@ -15,8 +15,7 @@ class SaveNewTitleController extends Controller
     public function __construct(
         private readonly SaveArticleUseCase $saveArticleUseCase,
         private readonly FetchAllArticlesUseCase $fetchAllArticlesUseCase
-    ) {
-    }
+    ) {}
 
     /**
      * 新規記事を登録する
@@ -68,7 +67,7 @@ class SaveNewTitleController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'data' => array_map(fn($article) => $article->toArray(), $articles),
+                'data' => array_map(fn ($article) => $article->toArray(), $articles),
             ]);
 
         } catch (\Exception $e) {

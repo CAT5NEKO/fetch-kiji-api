@@ -8,8 +8,7 @@ final readonly class ArticleTitle
 {
     private function __construct(
         private string $value
-    ) {
-    }
+    ) {}
 
     public static function from(string $title): self
     {
