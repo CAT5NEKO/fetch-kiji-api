@@ -1,0 +1,35 @@
+language: php
+
+php:
+  - 8.2
+
+services:
+  - mysql
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+env:
+  global:
+    - COMPOSER_PROCESS_TIMEOUT=0
+    - COMPOSER_NO_INTERACTION=1
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS fetchkiji_test;'
+  - phpenv config-rm xdebug.ini || true
+
+install:
+  - composer install --no-interaction --prefer-dist --optimize-autoloader
+
+before_script:
+  - cp .env.example .env
+  - php artisan key:generate
+  - php artisan config:clear
+
+script:
+  - vendor/bin/pint --test
+  - php artisan test
+
+notifications:
+  email: false
