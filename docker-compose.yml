@@ -1,0 +1,62 @@
+services:
+  # PHP-FPM
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fetchkiji-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./storage:/var/www/html/storage
+    networks:
+      - fetchkiji-network
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=fetchkiji
+      - DB_USERNAME=fetchkiji_user
+      - DB_PASSWORD=fetchkiji_password
+
+  # Nginx
+  nginx:
+    image: nginx:alpine
+    container_name: fetchkiji-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - fetchkiji-network
+    depends_on:
+      - app
+
+  # MySQL
+  db:
+    image: mysql:8.0
+    container_name: fetchkiji-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: fetchkiji
+      MYSQL_USER: fetchkiji_user
+      MYSQL_PASSWORD: fetchkiji_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - fetchkiji-network
+    command: --default-authentication-plugin=mysql_native_password
+
+networks:
+  fetchkiji-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local
